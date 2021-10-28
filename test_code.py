@@ -1,4 +1,5 @@
 import subprocess
+import numpy as np
 from compare_two_genomes import compare_two_files_to_get_multiple_containments
 
 if __name__ == "__main__":
@@ -45,4 +46,10 @@ if __name__ == "__main__":
         mash_containments.append(c)
     print(mash_containments)
     print(scaled_containments)
+    
+    mash_c_avg = np.average(mash_containments)
+    mash_c_var = np.var(mash_containments)
+    scaled_c_avg = np.average(scaled_containments)
+    scaled_c_var = np.var(scaled_containments)
+    print(true_containment, mash_c_avg, mash_c_var, scaled_c_avg, scaled_c_var)
     
