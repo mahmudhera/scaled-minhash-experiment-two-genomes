@@ -20,8 +20,14 @@ if __name__ == "__main__":
     f.close()
     
     f = open('mash_output', 'w')
-    
     cmd = "bash script.sh"
     cmd_args = cmd.split(' ')
     subprocess.call(cmd_args, stdout=f)
+    f.close()
+    
+    f = open('mash_jaccards', 'w')
+    cmd = 'cut -f3 mash_output'
+    cmd_args = cmd.split(' ')
+    subprocess.call(cmd_args, stdout=f)
+    f.close()
     
