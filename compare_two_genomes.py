@@ -105,38 +105,37 @@ will return: size_1, size_2, size_union, size_intersection, true_containment, li
 the size of the list = num_runs
 """
 def compare_two_files_to_get_multiple_containments(filename_1, filename_2, k, scale_facor, num_runs):
-	seeds = [i+1 for i in range(num_runs)]
-        H = int(2**64)
+    seeds = [i+1 for i in range(num_runs)]
+    H = int(2**64)
 
-	sketch_sizes = []
-	true_containments = []
-	for seed in seeds:
-	        kmer_hashes_1 = set()
-        	kmer_hashes_2 = set()
-	        for kmer in get_kmers_in_file(filename_1, k):
-        	        kmer_hashes_1.add(get_hash_from_kmer(kmer, seed=seed))
-	        for kmer in get_kmers_in_file(filename_2, k):
-        	        kmer_hashes_2.add(get_hash_from_kmer(kmer, seed=seed))
-
-	        size_1 = len(kmer_hashes_1)
-        	size_2 = len(kmer_hashes_2)
-	        size_union = len( kmer_hashes_1.union( kmer_hashes_2 ) )
-        	size_intersection = len( kmer_hashes_1.intersection( kmer_hashes_2 ) )
-
-	        smh1 = ScaledMinHash(scale_facor, H)
-        	smh1.add_values(kmer_hashes_1)
-
-	        smh2 = ScaledMinHash(scale_facor, H)
-        	smh2.add_values(kmer_hashes_2)
-	        scaled_containment = smh1.get_containment(smh2)
-        	sketch_size = smh1.get_sketch_size()
-
-		sketch_sizes.append(sketch_size)
-		scaled_containments.append(scaled_containment)
-
-	true_containment = 1.0*size_intersection/size_1
-
-        return size_1, size_2, size_union, size_intersection, true_containment, scaled_containments, sketch_sizes
+    sketch_sizes = []
+    true_containments = []
+    for seed in seeds:
+        kmer_hashes_1 = set()
+        kmer_hashes_2 = set()
+            for kmer in get_kmers_in_file(filename_1, k):
+                kmer_hashes_1.add(get_hash_from_kmer(kmer, seed=seed))
+            for kmer in get_kmers_in_file(filename_2, k):
+                kmer_hashes_2.add(get_hash_from_kmer(kmer, seed=seed))
+                
+            size_1 = len(kmer_hashes_1)
+            size_2 = len(kmer_hashes_2)
+            size_union = len( kmer_hashes_1.union( kmer_hashes_2 ) )
+            size_intersection = len( kmer_hashes_1.intersection( kmer_hashes_2 ) )            
+            
+            smh1 = ScaledMinHash(scale_facor, H)
+            smh1.add_values(kmer_hashes_1)
+            smh2 = ScaledMinHash(scale_facor, H)
+            smh2.add_values(kmer_hashes_2)
+            
+            scaled_containment = smh1.get_containment(smh2)
+            sketch_size = smh1.get_sketch_size()
+        
+        sketch_sizes.append(sketch_size)
+        scaled_containments.append(scaled_containment)
+    
+    true_containment = 1.0*size_intersection/size_1
+    return size_1, size_2, size_union, size_intersection, true_containment, scaled_containments, sketch_sizes
 
 def parse_arguments(sys_args):
 	parser = argparse.ArgumentParser()
