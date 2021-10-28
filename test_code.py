@@ -32,15 +32,17 @@ if __name__ == "__main__":
     subprocess.call(cmd_args, stdout=f)
     f.close()
     
-    exit(0)
-    
     mash_jaccards = []
     f = open('mash_jaccards', 'r')
     lines = f.readlines()
     for line in lines:
-        mash_jaccards.append( float(line.strip()) )
+        v1 = line.split('/')[0]
+        v2 = line.split('/')[1]
+        mash_jaccards.append( 1.0 * v1 / v2 )
     print(mash_jaccards)
     f.close()
+    
+    exit(0)
     
     mash_containments = []
     for j in mash_jaccards:
