@@ -36,8 +36,8 @@ if __name__ == "__main__":
     f = open('mash_jaccards', 'r')
     lines = f.readlines()
     for line in lines:
-        v1 = line.split('/')[0]
-        v2 = line.split('/')[1]
+        v1 = float(line.split('/')[0])
+        v2 = float(line.split('/')[1])
         mash_jaccards.append( 1.0 * v1 / v2 )
     print(mash_jaccards)
     f.close()
