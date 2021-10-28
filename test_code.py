@@ -42,8 +42,6 @@ if __name__ == "__main__":
     print(mash_jaccards)
     f.close()
     
-    exit(0)
-    
     mash_containments = []
     for j in mash_jaccards:
         c = j * 1.0 * size_union / size_1
