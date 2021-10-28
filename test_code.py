@@ -9,16 +9,19 @@ if __name__ == "__main__":
     k = 21
     size_1, size_2, size_union, size_intersection, true_containment, scaled_containments, sketch_sizes = compare_two_files_to_get_multiple_containments(f1, f2, k, s, num_runs)
     
+    print(scaled_containments)
+    
     f = open("script.sh", 'w')
     for i in range(num_runs):
         seed_for_mash = i + 1
-        command = "mash dist " + f1 + " " + f2 + " -s " +str(sketch_sizes[i])+ " -S " + seed_for_mash
+        command = "mash dist " + f1 + " " + f2 + " -s " +str(sketch_sizes[i])+ " -S " + str(seed_for_mash)
         f.write(command)
         f.write("\n")
     f.close()
     
-    cmd = "bash script.sh > testout"
-    cmd_args = cmd.split(' ')
-    subprocess.call(cmd_args)
+    f = open('mash_output', 'w')
     
-    print(scaled_containments)
+    cmd = "bash script.sh"
+    cmd_args = cmd.split(' ')
+    subprocess.call(cmd_args, stdout=f)
+    
