@@ -37,4 +37,12 @@ if __name__ == "__main__":
     for line in lines:
         mash_jaccards.append( float(line.strip()) )
     print(mash_jaccards)
+    f.close()
+    
+    mash_containments = []
+    for j in mash_jaccards:
+        c = j * 1.0 * size_union / size_1
+        mash_containments.append(c)
+    print(mash_containments)
+    print(scaled_containments)
     
