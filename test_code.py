@@ -31,3 +31,10 @@ if __name__ == "__main__":
     subprocess.call(cmd_args, stdout=f)
     f.close()
     
+    mash_jaccards = []
+    f = open('mash_jaccards', 'r')
+    lines = f.readlines()
+    for line in lines:
+        mash_jaccards.append( float(line.strip()) )
+    print(mash_jaccards)
+    
