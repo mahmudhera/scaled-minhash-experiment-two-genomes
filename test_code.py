@@ -8,7 +8,7 @@ import sys
 def parse_arguments(sys_args):
     parser = argparse.ArgumentParser()
     parser.add_argument("-k", "--ksize", type=int, default=21)
-    parser.add_argument("-s", "--scale-facor", type=float, default=0.001)
+    parser.add_argument("-s", "--scale-factor", type=float, default=0.001)
     parser.add_argument("--f1", default=None)
     parser.add_argument("--f2", default=None)
     parser.add_argument("--seed", type=int, default=1)

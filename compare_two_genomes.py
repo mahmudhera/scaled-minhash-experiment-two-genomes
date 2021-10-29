@@ -140,7 +140,7 @@ def compare_two_files_to_get_multiple_containments(filename_1, filename_2, k, sc
 def parse_arguments(sys_args):
 	parser = argparse.ArgumentParser()
 	parser.add_argument("-k", "--ksize", type=int, default=21)
-	parser.add_argument("-s", "--scale-facor", type=float, default=0.001)
+	parser.add_argument("-s", "--scale-factor", type=float, default=0.001)
 	parser.add_argument("--f1", default=None)
 	parser.add_argument("--f2", default=None)
 	parser.add_argument("--seed", type=int, default=1)
@@ -152,8 +152,8 @@ if __name__=="__main__":
 	filename_1 = args.f1
 	filename_2 = args.f2
 	k = args.ksize
-	scale_facor = args.scale_facor
+	scale_factor = args.scale_factor
 	seed = args.seed
 	
-	values = compare_two_files(filename_1, filename_2, k, scale_facor, seed)
+	values = compare_two_files(filename_1, filename_2, k, scale_factor, seed)
 	print(values)
