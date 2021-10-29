@@ -12,9 +12,9 @@ def parse_arguments(sys_args):
     parser.add_argument("f1")
     parser.add_argument("f2")
     parser.add_argument("--seed", type=int, default=1)
-    parser.add_argument("-c", "--confidence", default=0.95)
-    parser.add_argument("-N", "--num-runs", default=10)
-    parser.add_argument("-p", "--mutation-rate", type=int, default=-1)
+    parser.add_argument("-c", "--confidence", type=float, default=0.95)
+    parser.add_argument("-N", "--num-runs", type=int, default=10)
+    parser.add_argument("-p", "--mutation-rate", type=float, default=-1.0)
     args = parser.parse_args()
     return args
 
@@ -22,11 +22,11 @@ if __name__ == "__main__":
     args = parse_arguments(sys.argv)
     f1 = args.f1
     f2 = args.f2
-    num_runs = args.num_runs
-    s = args.scale_factor
-    k = args.ksize
-    confidence = args.confidence
-    known_mutation_rate = args.mutation_rate
+    num_runs = int(args.num_runs)
+    s = float(args.scale_factor)
+    k = int(args.ksize)
+    confidence = float(args.confidence)
+    known_mutation_rate = float(args.mutation_rate)
     
     size_1, size_2, size_union, size_intersection, true_containment, scaled_containments, sketch_sizes = compare_two_files_to_get_multiple_containments(f1, f2, k, s, num_runs)
     
