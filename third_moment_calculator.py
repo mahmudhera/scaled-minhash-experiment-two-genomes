@@ -7,8 +7,6 @@ def var_c_scaled_first_order_taylor(L,k,p,s):
     q = 1 - (1 - p) ** k
     m = L - L*q
     n = L*q
-    #print(n)
-    #print(m)
     return 1.0 * m * n * (1-s) / (L**3 * s)
 
 def var_test(L,k,p,s,confidence):
@@ -56,22 +54,3 @@ def fourth_moment_using_normal(L,k,p):
     var = var_n_mutated(L, k, p)
     fourth_moment = mu**4 + 6 * mu**2 * var + 3 * var**2
     return fourth_moment
-
-def generate_third_moment_stats(L_low,L_high,dL,k,p,perform_simulation=True,num_itertions=1000):
-    stats = []
-    for L in range(L_low,L_high,dL):
-        if perform_simulation:
-            mutation_model = MutationModel(L+k-1,k,p)
-            n_mut_list = []
-            for trial_number in range(num_itertions):
-                mutation_model.generate()
-                n_errors, n_mutated = mutation_model.count()
-                n_mut_list.append(n_mutated)
-            n_mut_cube_sim = 1.0*sum([x**3 for x in n_mut_list])/num_itertions
-        n_mut_cube_normal = third_moment_nmut_using_normal(L,k,p)
-        n_mut_cube_exact = third_moment_nmut_exact(L,k,p)
-        if perform_simulation:
-            stats.append((L,n_mut_cube_sim, n_mut_cube_exact, n_mut_cube_normal))
-        else:
-            stats.append((L,n_mut_cube_exact, n_mut_cube_normal))
-    return stats
