@@ -11,6 +11,7 @@ def get_names_and_sequences_in_file(filename):
 def mutate_sequence(sequence, mutation_rate, seed):
     random.seed(seed)
     sequence = sequence.upper()
+    mutated_seq = []
     for i in range(len(sequence)):
         if sequence[i] != 'N':
             r = random.random()
@@ -18,8 +19,10 @@ def mutate_sequence(sequence, mutation_rate, seed):
                 base = bases[ random.randint(0,3) ]
                 while base == sequence[i]:
                     base = bases[ random.randint(0,3) ]
-                sequence[i] = base
-    return sequence
+                mutated_seq.append(base)
+        else:
+            mutated_seq.append(sequence[i])
+    return mutated_seq
 
 def write_fasta(filename, names, sequences):
     f = open(filename, 'w')
