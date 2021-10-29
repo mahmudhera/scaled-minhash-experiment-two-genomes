@@ -22,7 +22,7 @@ def mutate_sequence(sequence, mutation_rate, seed):
                 mutated_seq.append(base)
         else:
             mutated_seq.append(sequence[i])
-    return mutated_seq
+    return "".join(mutated_seq)
 
 def write_fasta(filename, names, sequences):
     f = open(filename, 'w')
