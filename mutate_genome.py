@@ -1,0 +1,38 @@
+import screed
+import random
+
+bases = ['A', 'C', 'G', 'T']
+
+def get_names_and_sequences_in_file(filename):
+	with screed.open(filename) as f:
+		for record in f:
+			yield record.name, record.sequence
+            
+def mutate_sequence(sequence, mutation_rate, seed):
+    random.seed(seed)
+    sequence = sequence.upper()
+    for i in range(len(sequence)):
+        if sequence[i] != 'N':
+            r = random.random()
+            if r <= mutation_rate:
+                base = bases[ random.randint(0,3) ]
+                while base == sequence[i]:
+                    base = bases[ random.randint(0,3) ]
+                sequence[i] = base
+    return sequence
+
+def write_fasta(filename, names, sequences):
+    f = open(filename, 'w')
+    for (name, seq) in list( zip(names, sequences) ):
+        f.write('> ' + name + '\n')
+        f.write(seq + '\n')
+    f.close()
+    
+def mutate_file(filename, output_filename, mutation_rate, seed):
+    names = []
+    sequences = []
+    for name, seq in get_names_and_sequences_in_file(filename):
+        names.append(name)
+        mutated_sequence = mutate_sequence(seq, mutation_rate, seed)
+        sequences.append(mutated_sequence)
+    write_fasta(output_filename, names, sequences)
