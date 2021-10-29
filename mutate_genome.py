@@ -20,8 +20,8 @@ def mutate_sequence(sequence, mutation_rate, seed):
                 while base == sequence[i]:
                     base = bases[ random.randint(0,3) ]
                 mutated_seq.append(base)
-        else:
-            mutated_seq.append(sequence[i])
+            else:
+                mutated_seq.append(sequence[i])
     return "".join(mutated_seq)
 
 def write_fasta(filename, names, sequences):
