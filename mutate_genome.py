@@ -40,6 +40,4 @@ def mutate_file(filename, output_filename, mutation_rate, seed):
         sequences.append(mutated_sequence)
     write_fasta(output_filename, names, sequences)
     
-mutate_file('original.fasta', 'temp', 0.1, 1)
-mutate_file('original.fasta', 'temp2', 0.01, 1)
-mutate_file('original.fasta', 'temp3', 0.2, 1)
+mutate_file('genome.fasta', 'temp', 0.1, 1)
