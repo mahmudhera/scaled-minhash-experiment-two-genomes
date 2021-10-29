@@ -74,11 +74,6 @@ if __name__ == "__main__":
     scaled_c_avg = np.average(scaled_containments)
     scaled_c_var = np.var(scaled_containments)
     
-    # get p from scaled containment
-    scaled_containment = scaled_containments[0]
-    L = int((size_1 + size_2)/2)
-    conf_interval = compute_confidence_interval_one_step([scaled_containment], L, k, confidence, s)
-    
     # get p from mash
     f = open('mash_distances', 'w')
     cmd = 'cut -f3 mash_output'
@@ -95,6 +90,10 @@ if __name__ == "__main__":
     f.close()
     
     mash_distance = mash_distances[0]
+    # get p from scaled containment
+    scaled_containment = scaled_containments[0]
+    L = int((size_1 + size_2)/2)
+    conf_interval = compute_confidence_interval_one_step([scaled_containment], L, k, confidence, s)[0]
     # get true p from fast ani if == -1
     
     print(true_containment, mash_c_avg, mash_c_var, scaled_c_avg, scaled_c_var)
