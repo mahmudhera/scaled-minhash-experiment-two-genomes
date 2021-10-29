@@ -3,7 +3,7 @@ import screed
 import mmh3
 import argparse
 
-__complementTranslation = {"A": "T", "C": "G", "G": "C", "T": "A", "N": "N"}
+__complementTranslation = {"A": "T", "C": "G", "G": "C", "T": "A", "N": "N", "R": "N"}
 
 """
 Simple implementation of scaled minhash
