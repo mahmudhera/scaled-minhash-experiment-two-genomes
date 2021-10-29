@@ -89,6 +89,8 @@ if __name__ == "__main__":
         mash_distances.append(d)
     f.close()
     
+    print(mash_distances)
+    
     mash_distance = mash_distances[0]
     # get p from scaled containment
     scaled_containment = scaled_containments[0]
