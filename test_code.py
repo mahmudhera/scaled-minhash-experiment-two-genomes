@@ -6,7 +6,7 @@ from p_from_scaled_containment import compute_confidence_interval_one_step
 if __name__ == "__main__":
     f1 = "original.fasta"
     f2 = "mutated.fasta"
-    num_runs = 1000
+    num_runs = 10
     s = 0.01
     k = 21
     confidence = 0.95
@@ -60,8 +60,25 @@ if __name__ == "__main__":
     
     # get p from scaled containment
     scaled_containment = scaled_containments[0]
-    L = (size_1 + size_2)/2
+    L = int((size_1 + size_2)/2)
     conf_interval = compute_confidence_interval_one_step([scaled_containment], L, k, confidence, s)
-    print(conf_interval)
     
     # get p from mash
+    f = open('mash_distances', 'w')
+    cmd = 'cut -f3 mash_output'
+    cmd_args = cmd.split(' ')
+    subprocess.call(cmd_args, stdout=f)
+    f.close()
+    
+    mash_distances = []
+    f = open('mash_distances', 'r')
+    lines = f.readlines()
+    for line in lines:
+        d = float( line.strip() )
+        mash_distances.append(d)
+    f.close()
+    
+    mash_distance = mash_distances[0]
+    
+    print(mash_distance, conf_interval)
+    # get true p from fast ani
