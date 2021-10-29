@@ -1,6 +1,7 @@
 import subprocess
 import numpy as np
 from compare_two_genomes import compare_two_files_to_get_multiple_containments
+from p_from_scaled_containment import compute_confidence_interval_one_step
 
 if __name__ == "__main__":
     f1 = "original.fasta"
@@ -8,9 +9,10 @@ if __name__ == "__main__":
     num_runs = 1000
     s = 0.01
     k = 21
+    confidence = 0.95
     size_1, size_2, size_union, size_intersection, true_containment, scaled_containments, sketch_sizes = compare_two_files_to_get_multiple_containments(f1, f2, k, s, num_runs)
     
-    print(scaled_containments)
+    #print(scaled_containments)
     
     f = open("script.sh", 'w')
     for i in range(num_runs):
@@ -39,19 +41,27 @@ if __name__ == "__main__":
         v1 = float(line.split('/')[0])
         v2 = float(line.split('/')[1])
         mash_jaccards.append( 1.0 * v1 / v2 )
-    print(mash_jaccards)
+    #print(mash_jaccards)
     f.close()
     
     mash_containments = []
     for j in mash_jaccards:
         c = j * 1.0 * size_union / size_1
         mash_containments.append(c)
-    print(mash_containments)
-    print(scaled_containments)
+    #print(mash_containments)
+    #print(scaled_containments)
     
     mash_c_avg = np.average(mash_containments)
     mash_c_var = np.var(mash_containments)
     scaled_c_avg = np.average(scaled_containments)
     scaled_c_var = np.var(scaled_containments)
+    
     print(true_containment, mash_c_avg, mash_c_var, scaled_c_avg, scaled_c_var)
     
+    # get p from scaled containment
+    scaled_containment = scaled_containments[0]
+    L = (size_1 + size_2)/2
+    conf_interval = compute_confidence_interval_one_step([scaled_containment], L, k, confidence, s)
+    print(conf_interval)
+    
+    # get p from mash
