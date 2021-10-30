@@ -18,6 +18,6 @@ f.close()
 
 for mutation_rate in mut_rates:
     mutated_filename = mutated_filename_prefix+str((mutation_rate*100))+'.fasta'
-    cmd = "python test_code.py ecoli.fasta " + mutated_filename + " -k " + str(k) + " -s " + scale_factor + " --seed " + str(seed) + " -c 0.95 -N " + str(num_runs) + " -p " + str(mutation_rate) + " --fout " + stats_filename
+    cmd = "python test_code.py ecoli.fasta " + mutated_filename + " -k " + str(k) + " -s " + str(scale_factor) + " --seed " + str(seed) + " -c 0.95 -N " + str(num_runs) + " -p " + str(mutation_rate) + " --fout " + stats_filename
     args = cmd.split(' ')
     subprocess.call(args)
