@@ -6,7 +6,7 @@ seed = 1
 stats_filename = 'stats'
 reference_genome = 'ecoli.fasta'
 mutated_filename_prefix = 'ecoli_mutated_'
-k = 11
+k = 21
 scale_factor = 0.1
 num_runs = 10
 
