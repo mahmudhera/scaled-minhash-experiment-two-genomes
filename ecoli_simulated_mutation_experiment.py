@@ -1,7 +1,7 @@
 import subprocess
 from mutate_genome import mutate_file
 
-mut_rates = [0.01, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.99]
+mut_rates = [0.001, 0.01, 0.025, 0.05, 0.1, 0.15, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.99]
 seed = 1
 stats_filename = 'stats'
 reference_genome = 'ecoli.fasta'
