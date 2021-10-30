@@ -7,7 +7,7 @@ stats_filename = 'stats'
 reference_genome = 'ecoli.fasta'
 mutated_filename_prefix = 'ecoli_mutated_'
 k = 21
-scale_factor = 0.1
+scale_factor = 0.01
 num_runs = 10
 
 for mutation_rate in mut_rates:
