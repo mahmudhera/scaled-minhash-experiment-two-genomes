@@ -15,6 +15,7 @@ def parse_arguments(sys_args):
     parser.add_argument("-c", "--confidence", type=float, default=0.95)
     parser.add_argument("-N", "--num-runs", type=int, default=10)
     parser.add_argument("-p", "--mutation-rate", type=float, default=-1.0)
+    parser.add_argument("--fout", help="will append to end of this file", default=None)
     args = parser.parse_args()
     return args
 
@@ -27,6 +28,9 @@ if __name__ == "__main__":
     k = int(args.ksize)
     confidence = float(args.confidence)
     known_mutation_rate = float(args.mutation_rate)
+    fout = args.fout
+    if fout is not None:
+        sys.stdout = open(fout, 'a')
     
     size_1, size_2, size_union, size_intersection, true_containment, scaled_containments, sketch_sizes = compare_two_files_to_get_multiple_containments(f1, f2, k, s, num_runs)
     
@@ -89,7 +93,7 @@ if __name__ == "__main__":
         mash_distances.append(d)
     f.close()
     
-    print(mash_distances)
+    #print(mash_distances)
     
     mash_distance = mash_distances[0]
     # get p from scaled containment
@@ -98,5 +102,7 @@ if __name__ == "__main__":
     conf_interval = compute_confidence_interval_one_step([scaled_containment], L, k, confidence, s)[0]
     # get true p from fast ani if == -1
     
-    print(true_containment, mash_c_avg, mash_c_var, scaled_c_avg, scaled_c_var)
-    print(known_mutation_rate, mash_distance, conf_interval[6], conf_interval[4], conf_interval[5])
+    print(known_mutation_rate, true_containment, mash_c_avg, mash_c_var, scaled_c_avg, scaled_c_var, mash_distance, conf_interval[6], conf_interval[4], conf_interval[5])
+
+    if fout is not None:
+        sys.stdout.close()
