@@ -101,7 +101,7 @@ if __name__ == "__main__":
     # get true p from fast ani if == -1
     
     if fout is not None:
-        sys.stdout(fout, 'a')
+        sys.stdout = open(fout, 'a')
     print(known_mutation_rate, true_containment, mash_c_avg, mash_c_var, scaled_c_avg, scaled_c_var, mash_distance, conf_interval[6], conf_interval[4], conf_interval[5])
     if fout is not None:
         sys.stdout.close()
