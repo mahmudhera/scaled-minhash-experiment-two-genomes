@@ -174,7 +174,7 @@ def compare_two_files_to_get_multiple_containments(filename_1, filename_2, k, sc
 g_filename = 'ecoli.fasta'
 smallg_filename = 'temp.fasta'
 smg_filename = 'supermg.fasta'
-mg_filename = 'my-metagenome.fa'
+mg_filename = 'SRR492190.contigs.fa'
 
 scale_factor = 0.0005
 k = 21
