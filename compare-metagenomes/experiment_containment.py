@@ -177,14 +177,17 @@ k = 21
 C = 0.1
 num_runs = 1
 seed = 1
+for C in [0.1, 0.2, 0.3]:
+    extract_part_of_genome(C, g_filename, smallg_filename)
+    create_super_metagenome(mg_filename, smallg_filename, smg_filename)
+    num_kmers = count_num_kmers_in_file(g_filename, k)
+    for scale_factor in [0.0005, 0.00075, 0.001]:
+        expected_sketch_size = int(num_kmers * scale_factor)
+        size_1, size_2, size_union, size_intersection, true_containment, scaled_containments, sketch_sizes = compare_two_files_to_get_multiple_containments(g_filename, smg_filename, k, scale_factor, num_runs)
+        mash_containments = get_mash_containments(g_filename, smg_filename, expected_sketch_size, size_union, size_1)
+        print(C, scale_factor)
+        print(true_containment)
+        print(scaled_containments)
+        print(mash_containments)
+        print('\n')
 
-extract_part_of_genome(C, g_filename, smallg_filename)
-create_super_metagenome(mg_filename, smallg_filename, smg_filename)
-num_kmers = count_num_kmers_in_file(g_filename, k)
-expected_sketch_size = int(num_kmers * scale_factor)
-size_1, size_2, size_union, size_intersection, true_containment, scaled_containments, sketch_sizes = compare_two_files_to_get_multiple_containments(g_filename, smg_filename, k, scale_factor, num_runs)
-print(size_union, size_intersection)
-mash_containments = get_mash_containments(g_filename, smg_filename, expected_sketch_size, size_union, size_1)
-print(true_containment)
-print(scaled_containments)
-print(mash_containments)
