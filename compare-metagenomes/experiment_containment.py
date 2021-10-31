@@ -1,6 +1,7 @@
 import screed
 import subprocess
 import mmh3
+import numpy as np
 
 __complementTranslation = {"A": "T", "C": "G", "G": "C", "T": "A", "N": "N", "R": "N"}
 
@@ -177,9 +178,9 @@ mg_filename = 'SRR492190.contigs.fa'
 scale_factor = 0.0005
 k = 21
 C = 0.1
-num_runs = 1
+num_runs = 20
 seed = 1
-for C in [0.05 * i for i in range(1, 20)]:
+for C in [0.1]:
     extract_part_of_genome(C, g_filename, smallg_filename)
     create_super_metagenome(mg_filename, smallg_filename, smg_filename)
     num_kmers = count_num_kmers_in_file(g_filename, k)
@@ -190,6 +191,9 @@ for C in [0.05 * i for i in range(1, 20)]:
         mash_containments = get_mash_containments(g_filename, smg_filename, expected_sketch_size, size_union, size_1)
         #print(size_1, size_2, size_union, size_intersection)
         #print(C, scale_factor)
-        print(true_containment,scaled_containments,mash_containments)
-        print('\n')
+        sc_c_avg = np.average(scaled_containments)
+        sc_c_var = np.var(scaled_containments)
+        mash_c_avg = np.average(mash_containments)
+        mash_c_var = np.var(mash_containments)
+        print(C, scale_factor, true_containment, sc_c_avg, sc_c_var, mash_c_avg, mash_c_var)
 
