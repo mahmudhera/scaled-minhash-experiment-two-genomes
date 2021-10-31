@@ -80,11 +80,12 @@ def extract_part_of_genome(c, genome_filename, out_filename):
             if len(record.sequence) < required_length:
                 small_str = record.sequence[:required_length]
                 break
-    f = open(out_filename, 'w')
-    f.write('>small_seq\n')
-    f.write(small_str)
-    f.write('\n')
-    f.close()
+    print(small_str[-10:-1])
+    f2 = open(out_filename, 'w')
+    f2.write('>small_seq\n')
+    f2.write(small_str)
+    f2.write('\n')
+    f2.close()
     
 def create_super_metagenome(metagenome_filename, small_genome_filename, super_mg_filename):
     args = ['cat', metagenome_filename, small_genome_filename]
