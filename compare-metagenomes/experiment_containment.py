@@ -81,6 +81,7 @@ def extract_part_of_genome(c, genome_filename, out_filename):
     f = open(out_filename, 'w')
     f.write('>small_seq\n')
     f.write(small_str)
+    f.write('\n')
     f.close()
     
 def create_super_metagenome(metagenome_filename, small_genome_filename, super_mg_filename):
