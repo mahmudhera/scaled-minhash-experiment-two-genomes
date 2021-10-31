@@ -77,7 +77,7 @@ def extract_part_of_genome(c, genome_filename, out_filename):
     print(required_length)
     with screed.open(genome_filename) as f:
         for record in f:
-            if len(record.sequence) < required_length:
+            if len(record.sequence) > required_length:
                 small_str = record.sequence[:required_length]
                 break
     print(small_str[-10:-1])
@@ -181,7 +181,7 @@ k = 21
 C = 0.1
 num_runs = 1
 seed = 1
-for C in [0.25]:
+for C in [0.1, 0.25]:
     extract_part_of_genome(C, g_filename, smallg_filename)
     create_super_metagenome(mg_filename, smallg_filename, smg_filename)
     num_kmers = count_num_kmers_in_file(g_filename, k)
