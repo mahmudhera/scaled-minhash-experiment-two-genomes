@@ -95,6 +95,43 @@ def count_num_kmers_in_file(filename, k):
         kmer_hashes.add(get_hash_from_kmer(kmer))
     return len(kmer_hashes)
 
+def get_mash_containments(f1, f2, sketch_size, size_union, size_1):
+    f = open("script.sh", 'w')
+    for i in range(num_runs):
+        seed_for_mash = i + 1
+        command = "mash dist " + f1 + " " + f2 + " -s " +str(sketch_size)+ " -S " + str(seed_for_mash)
+        f.write(command)
+        f.write("\n")
+    f.close()
+    
+    f = open('mash_output', 'w')
+    cmd = "bash script.sh"
+    cmd_args = cmd.split(' ')
+    subprocess.call(cmd_args, stdout=f)
+    f.close()
+    
+    f = open('mash_jaccards', 'w')
+    cmd = 'cut -f5 mash_output'
+    cmd_args = cmd.split(' ')
+    subprocess.call(cmd_args, stdout=f)
+    f.close()
+    
+    mash_jaccards = []
+    f = open('mash_jaccards', 'r')
+    lines = f.readlines()
+    for line in lines:
+        v1 = float(line.split('/')[0])
+        v2 = float(line.split('/')[1])
+        mash_jaccards.append( 1.0 * v1 / v2 )
+    #print(mash_jaccards)
+    f.close()
+    
+    mash_containments = []
+    for j in mash_jaccards:
+        c = j * 1.0 * size_union / size_1
+        mash_containments.append(c)
+    
+
 def compare_two_files_to_get_multiple_containments(filename_1, filename_2, k, scale_facor, num_runs):
     seeds = [i+1 for i in range(num_runs)]
     H = int(2**64)
@@ -145,5 +182,7 @@ create_super_metagenome(mg_filename, smallg_filename, smg_filename)
 num_kmers = count_num_kmers_in_file(g_filename, k)
 expected_sketch_size = int(num_kmers * scale_factor)
 size_1, size_2, size_union, size_intersection, true_containment, scaled_containments, sketch_sizes = compare_two_files_to_get_multiple_containments(g_filename, smg_filename, k, scale_factor, num_runs)
+mash_containments = get_mash_containments(g_filename, smg_filename, k, expected_sketch_size, size_union, size_1)
 print(true_containment)
 print(scaled_containments)
+print(mash_containments)
