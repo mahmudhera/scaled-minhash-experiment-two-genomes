@@ -28,7 +28,7 @@ def get_kmers_in_file(filename, k):
 			for kmer in canonical_kmers(record.sequence, k):
 				yield kmer
 
-def get_hash_from_kmer(kmer, seed):
+def get_hash_from_kmer(kmer, seed=0):
 	hash_value = mmh3.hash64(kmer, seed=seed)[0]
 	if hash_value < 0:
 		hash_value += 2**64
