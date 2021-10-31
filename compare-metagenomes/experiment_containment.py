@@ -79,7 +79,7 @@ def extract_part_of_genome(c, genome_filename, out_filename):
                 small_str = record.sequence[:required_length]
                 break
     f = open(out_filename, 'w')
-    f.write('> small_seq\n')
+    f.write('>small_seq\n')
     f.write(small_str)
     f.close()
     
