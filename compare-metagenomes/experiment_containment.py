@@ -130,6 +130,7 @@ def get_mash_containments(f1, f2, sketch_size, size_union, size_1):
     for j in mash_jaccards:
         c = j * 1.0 * size_union / size_1
         mash_containments.append(c)
+    return mash_containments
     
 
 def compare_two_files_to_get_multiple_containments(filename_1, filename_2, k, scale_facor, num_runs):
