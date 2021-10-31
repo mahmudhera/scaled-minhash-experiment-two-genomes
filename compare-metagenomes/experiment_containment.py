@@ -181,7 +181,7 @@ k = 21
 C = 0.1
 num_runs = 1
 seed = 1
-for C in [0.1]:
+for C in [0.25]:
     extract_part_of_genome(C, g_filename, smallg_filename)
     create_super_metagenome(mg_filename, smallg_filename, smg_filename)
     num_kmers = count_num_kmers_in_file(g_filename, k)
