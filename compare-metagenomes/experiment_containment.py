@@ -74,13 +74,11 @@ def extract_part_of_genome(c, genome_filename, out_filename):
         for record in f:
             length += len(record.sequence)
     required_length = int(length * c)
-    print(required_length)
     with screed.open(genome_filename) as f:
         for record in f:
             if len(record.sequence) > required_length:
                 small_str = record.sequence[:required_length]
                 break
-    print(small_str[-10:-1])
     f2 = open(out_filename, 'w')
     f2.write('>small_seq\n')
     f2.write(small_str)
