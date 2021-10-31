@@ -180,12 +180,12 @@ k = 21
 C = 0.1
 num_runs = 20
 seed = 1
-for C in [0.1]:
+for C in [0.1*i for i in range(1, 11)]:
     extract_part_of_genome(C, g_filename, smallg_filename)
     create_super_metagenome(mg_filename, smallg_filename, smg_filename)
     num_kmers = count_num_kmers_in_file(g_filename, k)
     print(num_kmers)
-    for scale_factor in [0.0000075, 0.000005, 0.0000025, 0.000001]:
+    for scale_factor in [0.00001]:
         expected_sketch_size = int(num_kmers * scale_factor)
         size_1, size_2, size_union, size_intersection, true_containment, scaled_containments, sketch_sizes = compare_two_files_to_get_multiple_containments(g_filename, smg_filename, k, scale_factor, num_runs)
         mash_containments = get_mash_containments(g_filename, smg_filename, expected_sketch_size, size_union, size_1)
