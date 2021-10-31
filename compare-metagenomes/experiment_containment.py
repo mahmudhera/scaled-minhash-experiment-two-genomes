@@ -172,7 +172,7 @@ smallg_filename = 'temp.fasta'
 smg_filename = 'supermg.fasta'
 mg_filename = 'SRR492065.contigs.fa'
 
-scale_factor = 0.002
+scale_factor = 0.001
 k = 21
 C = 0.1
 num_runs = 1
