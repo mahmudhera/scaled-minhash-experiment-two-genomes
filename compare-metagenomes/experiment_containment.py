@@ -1,4 +1,5 @@
 import screed
+import subprocess
 
 # c is float, 0 < c < 1
 def extract_part_of_genome(c, genome_filename, out_filename):
@@ -17,4 +18,17 @@ def extract_part_of_genome(c, genome_filename, out_filename):
     f.write(small_str)
     f.close()
     
-extract_part_of_genome(0.1, 'ecoli.fasta', 'test.fasta')
+def create_super_metagenome(metagenome_filename, small_genome_filename, super_mg_filename):
+    args = ['cat', metagenome_filename, small_genome_filename]
+    f = open(super_mg_filename, 'w')
+    subprocess.call(args, stdout=f)
+    f.close()
+
+
+g_filename = 'ecoli.fasta'
+smallg_filename = 'temp.fasta'
+smg_filename = 'supermg.fasta'
+mg_filename = 'SRR492065.contigs.fa'
+
+extract_part_of_genome(0.1, g_filename, smallg_filename)
+create_super_metagenome(mg_filename, smallg_filename, smg_filename)
