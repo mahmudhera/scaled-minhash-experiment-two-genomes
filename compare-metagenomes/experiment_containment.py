@@ -68,6 +68,7 @@ def get_hash_from_kmer(kmer, seed=0):
 
 # c is float, 0 < c < 1
 def extract_part_of_genome(c, genome_filename, out_filename):
+    subprocess.call(['rm', out_filename])
     length = 0
     with screed.open(genome_filename) as f:
         for record in f:
