@@ -61,12 +61,12 @@ seed = 2
 stats_filename = 'results'
 k = 21
 scale_factor = 0.01
-num_runs = 2
+num_runs = 1
 
 f = open(stats_filename, 'w')
 f.close()
 
-for filename1 in glob.glob('*.fna'):
+for filename1 in ['ecoli.fna']:
     for filename2 in glob.glob('*.fna'):
         if filename1 == filename2:
             continue
