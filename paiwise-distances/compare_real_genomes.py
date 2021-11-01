@@ -70,9 +70,8 @@ for filename1 in ['ecoli.fna']:
     for filename2 in glob.glob('*.fna'):
         if filename1 == filename2:
             continue
-    
-    mutation_rate = get_true_mut_rate(filename1, filename2)
-    cmd = "python test_code.py " + filename1 + " " + filename2 + " -k " + str(k) + " -s " + str(scale_factor) + " --seed " + str(seed) + " -c 0.95 -N " + str(num_runs) + " -p " + str(mutation_rate) + " --fout " + stats_filename
-    args = cmd.split(' ')
-    subprocess.call(args)
+        mutation_rate = get_true_mut_rate(filename1, filename2)
+        cmd = "python test_code.py " + filename1 + " " + filename2 + " -k " + str(k) + " -s " + str(scale_factor) + " --seed " + str(seed) + " -c 0.95 -N " + str(num_runs) + " -p " + str(mutation_rate) + " --fout " + stats_filename
+        args = cmd.split(' ')
+        subprocess.call(args)
     
