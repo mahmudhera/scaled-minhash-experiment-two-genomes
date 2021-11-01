@@ -178,9 +178,9 @@ mg_filename = 'SRR492190.contigs.fa'
 scale_factor = 0.0005
 k = 21
 C = 0.1
-num_runs = 20
+num_runs = 1
 seed = 1
-for C in [0.05, 0.15, 0.25, 0.35, 0.45]:
+for C in [0.5]:
     extract_part_of_genome(C, g_filename, smallg_filename)
     create_super_metagenome(mg_filename, smallg_filename, smg_filename)
     num_kmers = count_num_kmers_in_file(g_filename, k)
