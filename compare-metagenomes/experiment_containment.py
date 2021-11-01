@@ -180,20 +180,20 @@ k = 21
 C = 0.1
 num_runs = 1
 seed = 1
-for C in [0.5]:
+num_hashes = 2000
+for C in [0.95]:
     extract_part_of_genome(C, g_filename, smallg_filename)
     create_super_metagenome(mg_filename, smallg_filename, smg_filename)
     num_kmers = count_num_kmers_in_file(g_filename, k)
-    print(num_kmers)
-    for scale_factor in [0.00001]:
-        expected_sketch_size = int(num_kmers * scale_factor)
-        size_1, size_2, size_union, size_intersection, true_containment, scaled_containments, sketch_sizes = compare_two_files_to_get_multiple_containments(g_filename, smg_filename, k, scale_factor, num_runs)
-        mash_containments = get_mash_containments(g_filename, smg_filename, expected_sketch_size, size_union, size_1)
-        #print(size_1, size_2, size_union, size_intersection)
-        #print(C, scale_factor)
-        sc_c_avg = np.average(scaled_containments)
-        sc_c_var = np.var(scaled_containments)
-        mash_c_avg = np.average(mash_containments)
-        mash_c_var = np.var(mash_containments)
-        print(C, scale_factor, true_containment, sc_c_avg, sc_c_var, mash_c_avg, mash_c_var)
+    scale_factor = 1.0*num_hashes/num_kmers
+    expected_sketch_size = int(num_kmers * scale_factor)
+    size_1, size_2, size_union, size_intersection, true_containment, scaled_containments, sketch_sizes = compare_two_files_to_get_multiple_containments(g_filename, smg_filename, k, scale_factor, num_runs)
+    mash_containments = get_mash_containments(g_filename, smg_filename, expected_sketch_size, size_union, size_1)
+    #print(size_1, size_2, size_union, size_intersection)
+    #print(C, scale_factor)
+    sc_c_avg = np.average(scaled_containments)
+    sc_c_var = np.var(scaled_containments)
+    mash_c_avg = np.average(mash_containments)
+    mash_c_var = np.var(mash_containments)
+    print(C, scale_factor, true_containment, sc_c_avg, sc_c_var, mash_c_avg, mash_c_var)
 
