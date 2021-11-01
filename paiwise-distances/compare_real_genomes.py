@@ -54,7 +54,7 @@ def get_true_mut_rate(filename1, filename2):
     f = open('temp', 'r')
     true_ani = float(f.readlines()[-1].split('\t')[1])
     f.close()
-    return true_ani
+    return 1.0-true_ani
     
 
 seed = 2
@@ -62,6 +62,9 @@ stats_filename = 'results'
 k = 21
 scale_factor = 0.01
 num_runs = 2
+
+f = open(stats_filename, 'w')
+f.close()
 
 for filename1 in glob.glob('*.fna'):
     for filename2 in glob.glob('*.fna'):
