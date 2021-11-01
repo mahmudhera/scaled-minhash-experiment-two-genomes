@@ -2,6 +2,7 @@ import sys
 import screed
 import mmh3
 import argparse
+import string
 
 __complementTranslation = {"A": "T", "C": "G", "G": "C", "T": "A", "N": "N", "R": "N"}
 for char in string.ascii_uppercase:
