@@ -57,7 +57,8 @@ def get_true_mut_rate(filename1, filename2):
     return true_ani
     
 
-get_true_mut_rate('ecoli.fna', 'ecoli.fna')
+print(get_true_mut_rate('ecoli.fna', 'ecoli.fna'))
+print(get_true_mut_rate('ecoli.fna', 'methanobacterium.fna'))
 exit(0)
 
 seed = 2
