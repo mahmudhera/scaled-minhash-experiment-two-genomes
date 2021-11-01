@@ -57,10 +57,6 @@ def get_true_mut_rate(filename1, filename2):
     return true_ani
     
 
-print(get_true_mut_rate('ecoli.fna', 'ecoli.fna'))
-print(get_true_mut_rate('ecoli.fna', 'methanobacterium.fna'))
-exit(0)
-
 seed = 2
 stats_filename = 'results'
 k = 21
@@ -75,7 +71,8 @@ for filename1 in glob.glob('*.fna'):
     count2 = count_num_kmers_in_file(filename2, k)
     L = (count1 + count2)/2
     
-    
-    
+    mutation_rate = get_true_mut_rate(filename1, filename2)
     cmd = "python test_code.py " + filename1 + " " + filename2 + " -k " + str(k) + " -s " + str(scale_factor) + " --seed " + str(seed) + " -c 0.95 -N " + str(num_runs) + " -p " + str(mutation_rate) + " --fout " + stats_filename
+    args = cmd.split(' ')
+    subprocess.call(args)
     
