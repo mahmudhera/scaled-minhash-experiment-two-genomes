@@ -54,7 +54,7 @@ def get_true_mut_rate(filename1, filename2):
     f = open('temp', 'r')
     true_ani = float(f.readlines()[-1].split('\t')[1])
     f.close()
-    return 1.0-true_ani
+    return 100.0-true_ani
     
 
 seed = 2
