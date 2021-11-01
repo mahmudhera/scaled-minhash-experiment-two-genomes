@@ -1,8 +1,12 @@
 import screed
 import glob
 import mmh3
+import string
 
 __complementTranslation = {"A": "T", "C": "G", "G": "C", "T": "A", "N": "N", "R": "N", 'K': 'N'}
+for char in string.ascii_uppercase:
+    if char not in __complementTranslation.keys():
+        __complementTranslation[char] = 'N'
 
 def reverse_complement(s):
     """
