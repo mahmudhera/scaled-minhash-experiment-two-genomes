@@ -4,7 +4,9 @@ import mmh3
 import argparse
 
 __complementTranslation = {"A": "T", "C": "G", "G": "C", "T": "A", "N": "N", "R": "N"}
-
+for char in string.ascii_uppercase:
+    if char not in __complementTranslation.keys():
+        __complementTranslation[char] = 'N'
 """
 Simple implementation of scaled minhash
 """
