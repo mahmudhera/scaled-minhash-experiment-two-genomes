@@ -2,7 +2,7 @@ import screed
 import glob
 import mmh3
 
-__complementTranslation = {"A": "T", "C": "G", "G": "C", "T": "A", "N": "N", "R": "N"}
+__complementTranslation = {"A": "T", "C": "G", "G": "C", "T": "A", "N": "N", "R": "N", 'K': 'N'}
 
 def reverse_complement(s):
     """
