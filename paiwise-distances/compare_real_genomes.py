@@ -57,7 +57,7 @@ def get_true_mut_rate(filename1, filename2):
     return true_ani
     
 
-get_true_mut_rate('ecoli.fasta', 'ecoli.fasta')
+get_true_mut_rate('ecoli.fna', 'ecoli.fna')
 exit(0)
 
 seed = 2
