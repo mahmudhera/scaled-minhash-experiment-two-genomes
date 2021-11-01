@@ -1,0 +1,15 @@
+##########################################################################################
+OAU v1.2
+##########################################################################################
+
+Calculating ANI for pair number: 1
+
+# Pair number mappings
+pair#	aligned_files
+1	ecoli.fna | methanobacterium.fna
+
+
+
+# OrthoANIu results as list
+pair#	orthoANI_value	avg_aligned_length	query_coverage	subject_coverage	query_length	subject_length
+1	63.4	4033	0.0014040914661319073	0.0017228416421034645	2872320	2340900
