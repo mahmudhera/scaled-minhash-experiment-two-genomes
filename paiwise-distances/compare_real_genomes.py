@@ -61,7 +61,7 @@ seed = 2
 stats_filename = 'results'
 k = 21
 scale_factor = 0.01
-num_runs = 10
+num_runs = 1
 
 for filename1 in glob.glob('*.fna'):
     for filename2 in glob.glob('*.fna'):
