@@ -93,9 +93,9 @@ if __name__ == "__main__":
     
     #print(mash_distances)
     
-    mash_distance = mash_distances[0]
+    mash_distance = np.average(mash_distances)
     # get p from scaled containment
-    scaled_containment = scaled_containments[0]
+    scaled_containment = np.average(scaled_containments)
     L = int((size_1 + size_2)/2)
     conf_interval = compute_confidence_interval_one_step([scaled_containment], L, k, confidence, s)[0]
     # get true p from fast ani if == -1
