@@ -178,14 +178,14 @@ mg_filename = 'SRR492190.contigs.fa'
 scale_factor = 0.0005
 k = 21
 C = 0.1
-num_runs = 1
+num_runs = 20
 seed = 1
 num_hashes = 2000
 
 num_kmers = count_num_kmers_in_file(g_filename, k)
 scale_factor = 1.0*num_hashes/num_kmers
 
-for C in [0.99]:
+for C in [0.99, 0.95, 0.90]:
     extract_part_of_genome(C, g_filename, smallg_filename)
     create_super_metagenome(mg_filename, smallg_filename, smg_filename)
     expected_sketch_size = int(num_kmers * scale_factor)
