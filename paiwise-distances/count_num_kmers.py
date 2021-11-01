@@ -42,7 +42,7 @@ def count_num_kmers_in_file(filename, k):
 
 k = 21
 f = open('genome_list', 'w')
-for filename in glob.glob('*.fa'):
+for filename in glob.glob('*.fna'):
     count = count_num_kmers_in_file(filename, k)
     print(filename, count)
     f.write(filename+'\n')
